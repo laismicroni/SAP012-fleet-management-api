@@ -15,18 +15,22 @@ async function insertDataFromSQLFile() {
                 if (command.trim() !== '') {
                     const [id, plate] = parseSQLCommand(command);
                     if (id) {
-                        const existingTaxi = await prisma.taxis.findUnique({
-                            where: { id: parseInt(id) },
-                        });
-                        if (!existingTaxi) {
-                            await prisma.taxis.create({
-                                data: {
-                                    id: parseInt(id),
-                                    plate: plate.trim(),
-                                },
+                        try {
+                            const existingTaxi = await prisma.taxis.findUnique({
+                                where: { id: parseInt(id) },
                             });
-                        } else {
-                            console.log(`Registro com id ${id} já existe, pulando inserção.`);
+                            if (!existingTaxi) {
+                                await prisma.taxis.create({
+                                    data: {
+                                        id: parseInt(id),
+                                        plate: plate.trim(),
+                                    },
+                                });
+                            } else {
+                                console.log(`Registro com id ${id} já existe, pulando inserção.`);
+                            }
+                        } catch (createError) {
+                            console.error(`Erro ao criar registro com id ${id}:`, createError);
                         }
                     }
                 }
@@ -38,8 +42,12 @@ async function insertDataFromSQLFile() {
     } catch (error) {
         console.error('Erro ao inserir dados:', error);
     } finally {
-        await prisma.$disconnect();
-        console.log('Conexão com o banco de dados encerrada.');
+        try {
+            await prisma.$disconnect();
+            console.log('Conexão com o banco de dados encerrada.');
+        } catch (disconnectError) {
+            console.error('Erro ao encerrar conexão com o banco de dados:', disconnectError);
+        }
     }
 }
 
