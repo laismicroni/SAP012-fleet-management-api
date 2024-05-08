@@ -1,0 +1,30 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_URL") // uses a direct connection
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+model taxis {
+  id      Int     @id @default(autoincrement())
+  plate   String
+  trajectories trajectories[]
+}
+
+model trajectories {
+  id        Int       @id @default(autoincrement())
+  date      DateTime
+  latitude  Float
+  longitude Float
+  taxi      taxis     @relation(fields: [taxi_id], references: [id])
+  taxi_id   Int
+}
