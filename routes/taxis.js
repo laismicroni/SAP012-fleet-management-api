@@ -5,7 +5,7 @@ const taxisController = require('../controllers/taxisController');
 /**
  * @swagger
  * tags:
- *   name: Táxis
+ *   name: Taxis
  *   description: Operações relacionadas aos táxis
  */
 
@@ -31,7 +31,7 @@ const taxisController = require('../controllers/taxisController');
  *           default: 10
  *     responses:
  *       200:
- *         description: Lista de táxis paginada
+ *         description: Lista paginada de táxis
  *         content:
  *           application/json:
  *             schema:
@@ -46,14 +46,7 @@ const taxisController = require('../controllers/taxisController');
  *                 taxis:
  *                   type: array
  *                   items:
- *                     type: object
- *                     properties:
- *                       id:
- *                         type: integer
- *                         description: ID do táxi
- *                       plate:
- *                         type: string
- *                         description: Placa do táxi
+ *                     $ref: '#/components/schemas/taxis'
  *       500:
  *         description: Erro interno do servidor
  */
