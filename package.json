@@ -3,7 +3,8 @@
     "@prisma/client": "^5.13.0",
     "@vercel/postgres": "^0.8.0",
     "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.0"
+    "swagger-ui-express": "^5.0.0",
+    "yamljs": "^0.3.0"
   },
   "devDependencies": {
     "jest": "^29.7.0",
@@ -12,5 +13,4 @@
   "scripts": {
     "test": "jest"
   }
-
 }

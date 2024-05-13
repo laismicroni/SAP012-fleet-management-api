@@ -1,0 +1,58 @@
+openapi: 3.0.0
+info:
+  title: API de Taxis
+  version: 1.0.0
+  description: API para operações relacionadas a taxis
+
+paths:
+  /api/taxis:
+    get:
+      summary: Listar todos os taxis
+      description: Retorna uma lista paginada de todos os taxis.
+      tags: 
+        - Táxis
+      parameters:
+        - in: query
+          name: page
+          description: Número da página a ser recuperada
+          schema:
+            type: integer
+            default: 1
+        - in: query
+          name: limit
+          description: Número máximo de registros por página
+          schema:
+            type: integer
+            default: 10
+      responses:
+        '200':
+          description: Lista paginada de taxis
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  totalPages:
+                    type: integer
+                    description: Número total de páginas
+                  currentPage:
+                    type: integer
+                    description: Número da página atual
+                  taxis:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/taxis'
+        '500':
+          description: Erro interno do servidor
+
+components:
+  schemas:
+    taxis:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: ID do táxi
+        plate:
+          type: string
+          description: Placa do táxi
