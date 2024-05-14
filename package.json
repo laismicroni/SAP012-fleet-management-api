@@ -11,6 +11,10 @@
     "prisma": "^5.13.0"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "prisma": "prisma generate && prisma migrate dev",
+    "swagger": "node swagger.js",
+    "start": "node index.js"
+
   }
 }
