@@ -12,9 +12,8 @@
   },
   "scripts": {
     "test": "jest",
-    "build": "prisma generate",
     "swagger": "node swagger.js",
+    "postinstall": "prisma generate",
     "start": "node index.js"
-
   }
 }
