@@ -16,8 +16,8 @@ exports.listAllTaxis = async (req, res) => {
 };
 exports.listTaxiLocationsByDate = async (req, res) => {
     try {
-        const taxiId = parseInt(req.params.id); // Captura o id do táxi dos parâmetros da URL
-        const date = new Date(req.query.date); // Captura a data dos parâmetros da URL
+        const taxiId = parseInt(req.params.id);
+        const date = new Date(req.query.date); 
         const page = parseInt(req.query.page) || 1;
         const limit = parseInt(req.query.limit) || 10;
         const startIndex = (page - 1) * limit;
@@ -39,7 +39,16 @@ exports.listLastTaxiLocations = async (req, res) => {
         const endIndex = page * limit;
 
         const lastTaxiLocations = await taxisService.listLastTaxiLocations(startIndex, endIndex);
-        res.status(200).json(lastTaxiLocations);
+
+        const locationsWithPlate = lastTaxiLocations.map((location) => ({
+            id: location.id,
+            plate: location.taxi.plate, 
+            latitude: location.latitude,
+            longitude: location.longitude,
+            date: location.date,
+        }));
+
+        res.status(200).json(locationsWithPlate);
     } catch (error) {
         console.error('Erro ao listar as últimas localizações dos táxis:', error);
         res.status(500).json({ error: 'Erro interno do servidor' });

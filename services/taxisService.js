@@ -36,6 +36,13 @@ exports.listLastTaxiLocations = async (startIndex, endIndex) => {
                 date: 'desc', 
             },
             distinct: ['taxi_id'], 
+            include: {
+                taxi: {
+                    select: {
+                        plate: true, 
+                    },
+                },
+            },
             skip: startIndex,
             take: endIndex - startIndex,
         });
