@@ -12,7 +12,7 @@
   },
   "scripts": {
     "test": "jest",
-    "prisma": "prisma generate && prisma migrate dev",
+    "build": "prisma generate",
     "swagger": "node swagger.js",
     "start": "node index.js"
 
