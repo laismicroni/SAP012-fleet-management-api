@@ -4,8 +4,7 @@
     "@vercel/postgres": "^0.8.0",
     "express": "^4.19.2",
     "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.0",
-    "yamljs": "^0.3.0"
+    "swagger-ui-express": "^5.0.0"
   },
   "devDependencies": {
     "jest": "^29.7.0",
@@ -14,8 +13,7 @@
   },
   "scripts": {
     "test": "jest",
-    "swagger": "node swagger.js",
-    "postinstall": "prisma generate",
+    "postinstall": "npm install swagger-ui-dist && prisma generate",
     "start": "node index.js"
   }
 }
