@@ -6,11 +6,11 @@ const taxisRoutes = require('./routes/taxis');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Configurar o Swagger UI
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
 // Adicionar as rotas
 app.use('/api', taxisRoutes);
+
+// Configurar o Swagger UI
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Iniciar o servidor
 app.listen(PORT, () => {
