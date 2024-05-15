@@ -6,13 +6,14 @@ const taxisRoutes = require('./routes/taxis');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Adicionar as rotas
 app.use('/api', taxisRoutes);
 
-// Configurar o Swagger UI
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+const CSS_URL = "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
 
-// Iniciar o servidor
+app.use('/api-docs', swaggerUi.serve, (req, res, next) => {
+    swaggerUi.setup(swaggerDocument, { customCssUrl: CSS_URL })(req, res, next);
+});
+
 app.listen(PORT, () => {
     console.log(`Servidor iniciado na porta ${PORT}`);
 });
