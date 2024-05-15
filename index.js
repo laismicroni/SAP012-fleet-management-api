@@ -9,11 +9,15 @@ const PORT = process.env.PORT || 5000;
 
 app.use('/api', taxisRoutes);
 
-const CSS_PATH = path.join(__dirname, 'config', 'swagger-custom.css');
-app.use('/swagger-custom.css', express.static(CSS_PATH));
+const CSS_FILENAME = 'swagger-custom.css';
+const CSS_PATH = path.join(__dirname, 'config', CSS_FILENAME);
+const CSS_URL = '/api-docs/' + CSS_FILENAME; 
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument, {
-  customCss: '/swagger-custom.css' 
+app.use('/api-docs', express.static(path.join(__dirname, 'config')));
+
+app.use('/api-docs', swaggerUi.serve);
+app.get('/api-docs', swaggerUi.setup(swaggerDocument, {
+  customCssUrl: CSS_URL
 }));
 
 app.listen(PORT, () => {
