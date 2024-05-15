@@ -13,16 +13,17 @@ const CSS_FILENAME = 'swagger-custom.css';
 const CSS_PATH = path.join(__dirname, 'config', CSS_FILENAME);
 const CSS_URL = '/api-docs/' + CSS_FILENAME; 
 
-app.use('/api-docs', (req, res, next) => {
-  res.type('text/css'); 
-  express.static(path.join(__dirname, 'config'))(req, res, next);
-});
+app.use('/api-docs', express.static(path.join(__dirname, 'config')));
 
-app.use('/api-docs', swaggerUi.serve);
-app.get('/api-docs', swaggerUi.setup(swaggerDocument, {
-  customCssUrl: CSS_URL
-}));
-
-app.listen(PORT, () => {
-    console.log(`Servidor iniciado na porta ${PORT}`);
-});
+app.use('/api-docs', swaggerUi.serve, (req, res, next) => {
+    if (req.url.endsWith('.css')) {
+      res.type('text/css'); 
+    }
+    next();
+  }, swaggerUi.setup(swaggerDocument, {
+    customCssUrl: CSS_URL
+  }));
+  
+  app.listen(PORT, () => {
+      console.log(`Servidor iniciado na porta ${PORT}`);
+  });
