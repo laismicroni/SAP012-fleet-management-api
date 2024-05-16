@@ -14,12 +14,19 @@ exports.listAllTaxis = async (startIndex, endIndex) => {
 
 exports.listTaxiLocationsByDate = async (taxiId, date, startIndex, endIndex) => {
     try {
+        const endDate = new Date(date);
+        endDate.setDate(endDate.getDate() + 1);
+
         return await prisma.trajectories.findMany({
             where: {
                 taxi_id: taxiId,
                 date: {
-                    gte: date, 
+                    gte: new Date(date),
+                    lt: endDate,
                 }
+            },
+            orderBy: {
+                date: 'asc' 
             },
             skip: startIndex,
             take: endIndex - startIndex,
@@ -28,6 +35,8 @@ exports.listTaxiLocationsByDate = async (taxiId, date, startIndex, endIndex) => 
         throw new Error('Erro ao listar localizações do táxi');
     }
 };
+
+
 
 exports.listLastTaxiLocations = async (startIndex, endIndex) => {
     try {
