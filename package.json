@@ -14,7 +14,7 @@
     "supertest": "^7.0.0"
   },
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage",
     "postinstall": "npm install swagger-ui-dist && prisma generate",
     "start": "node index.js"
   }

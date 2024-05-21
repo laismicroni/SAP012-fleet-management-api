@@ -27,3 +27,5 @@ app.use('/api-docs', swaggerUi.serve, (req, res, next) => {
   app.listen(PORT, () => {
       console.log(`Servidor iniciado na porta ${PORT}`);
   });
+
+  module.exports = app;
