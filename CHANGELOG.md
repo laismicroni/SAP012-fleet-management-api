@@ -50,3 +50,20 @@
 - Todos os recursos planejados para a tarefa foram implementados.
 - Os testes foram escritos e passaram com sucesso.
 - A documentação foi atualizada, incluindo a documentação do Swagger.
+
+
+## Versão 1.0.1 - 2024-05-15
+
+### Aprendizados da Sprint
+
+- Customização do CSS do Swagger.
+- Uso do supertest para os testes unitários.
+
+### Adicionado
+
+- Testes unitários de todos os endpoints.
+
+### Corrigido
+
+- Deploy do swagger no Vercel.
+- TaxiLocationsByDate ajustado para data específica e ordenado por hora.
