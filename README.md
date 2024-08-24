@@ -21,7 +21,8 @@ A documentação completa da API pode ser encontrada no Swagger [aqui](https://s
 ## Funcionalidades
 
 - **Listagem de Táxis**: Recupera uma lista paginada de todos os táxis.
-- **Localizações por Data**: Recupera todas as localizações de um táxi específico em uma data específica.
+- **Localizações por Data**: Recupera todas as localizações de um táxi
+específico em uma data específica.
 - **Últimas Localizações**: Recupera a última localização reportada por cada táxi.
 
 ## Endpoints
